@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body onload="init()">
+    <script>
+    /*网页一打开，随机出现星星，星星的大小是随机的（30-100）大小
+    位置是随机的， 
+      思想
+      1 onload 事件
+      2 启动 反复定时器 ,执行某个函数
+      3 在哪个函数中，创建一个星星，把星星对象放入容器中
+    */
+   function init(){
+    window.setInterval("start()",500); //每隔50毫秒就去执行star()这个函数
+   }
+
+   function start(){
+     //创建一个标签对象 <img> <img src="images/xingxing.gif"> 
+        var imgobj = document.createElement("img");
+        imgobj.src="img/xingxing.gif";
+        var bodyobj = document.body;  //找到了<body>对象
+        bodyobj.appendChild(imgobj); //把imgobj图片对象放入body对象中
+
+     //星星的大小是随机的（30-100）大小
+        var w=Math.floor(Math.random()*(100-30+1)+30);  //随机得到一个数
+        imgobj.width=w; //图片的宽度就是随机的了
+
+     //星星的位置随机
+        var x=Math.floor(Math.random()*(1350-0+1)+0); // x的坐标位置
+        var y=Math.floor(Math.random()*(768-0+1)+0); //y的坐标位置
+        imgobj.style.position="absolute"; 
+        imgobj.style.left=x+"px"; 
+        imgobj.style.top=y+"px";
+        imgobj.onclick=deleteme;  
+   }
+
+   function deleteme(){
+        var baba=this.parentNode; //找到图片的父对象
+        baba.removeChild(this); //删除星星对象 只能通过this对象传递过来
+   }
+  </script>
+  
+</body>
+</html>
