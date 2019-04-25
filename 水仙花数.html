@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>算法3</title>
+</head>
+<body>
+	<script>
+		//封装一个函数：输出100(min)到10000(max)以内的水仙花数;说明：水仙花数是指一个n(n>=3)位数字的数，它等于每个数字的n次幂（pow）之和。
+		// 例如：153  =  1的3次方 + 5的3次方 + 3的3次方。
+		//		 1634  =  1的4次方 + 6的4次方 + 3的4次方 + 4的4次方。
+		function fn(min,max){
+			var arr = [];
+			for(var i=min;i<=max;i++){
+				var str = i.toString();
+				var sum = 0;
+				for(var j=0;j<str.length;j++){
+					sum += Math.pow(str[j],str.length);
+				}
+				if(i == sum){
+					arr.push(sum);
+				}
+			}
+			document.write(arr);
+		}
+		fn(100,10000);
+	</script>
+</body>
+</html>
