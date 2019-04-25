@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		 <div class="options">
+		 	<ul id="items">
+		 		<li>音乐</li>
+		 		<li>美术</li>
+		 		<li>体育</li>
+		 		<li>游戏</li>
+		 		<li>旅游</li>
+		 		<li>跑步</li>
+		 		<li>爬山</li>
+		 		<li>探险</li>
+		 	</ul>
+		 </div>
+		 <div class="button-info">
+		 	<div class="button">
+		 		<p>
+		 			<input type="text" id="aihao" placeholder="请输入需要添加的标签" >
+		 		</p>
+		 		<span id="add">添加爱好</span>
+		 	</div>
+		 	<div class="tip" id='tishi' >最多只能选择三项</div>
+		 </div>
+		 <div class="result">
+		 	<ul id="selected">
+
+		 	</ul>
+		 </div>
+	</div>
+	<script>
+		var add = document.getElementById( 'add' ),
+			tishi = document.getElementById( 'tishi' ),
+			aihao = document.getElementById( 'aihao' ),
+			selected = document.getElementById( 'selected'),
+			lis = selected.getElementsByTagName( 'li' ),
+			items = document.getElementById( 'items' ),
+			li2 = items.getElementsByTagName( 'li' );
+
+			for( var i=0;i<li2.length;i++ ){
+				li2[i].onclick = function(){
+					if(lis.length<3){
+						var newLi = this.cloneNode(true);
+						selected.appendChild( newLi );
+						newLi.onclick = function(){
+							selected.removeChild( newLi );
+							tishi.style.display = 'none'
+						}
+					}else{
+						tishi.style.display = 'block'
+					}
+				}
+			}
+
+			add.onclick = function(){
+				if(aihao.value == ''){
+					alert('爱好不能为空！');
+				}else{
+					if(lis.length<3){
+						var newLi = document.createElement( 'li' );
+						newLi.innerHTML = aihao.value + '<span></span>'
+						selected.appendChild( newLi )
+						var spans = newLi.getElementsByTagName( 'span' );
+						spans[0].onclick = function(){
+							selected.removeChild( this.parentNode );
+							tishi.style.display = 'none';
+						}
+					}else{
+						tishi.style.display = 'block';
+					}
+
+				}
+			}
+
+
+
+	</script>
+
+</body>
+</html>

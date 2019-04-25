@@ -1,0 +1,106 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+ul{
+	list-style:none;
+}
+
+.container{
+	width:550px;
+	height:160px;
+	margin:50px auto;
+	padding:10px;
+}
+
+.options{
+	width:450px;
+}
+
+.options li,.result li{
+    width:100px;
+    height:27px;
+    float:left;
+    margin:0 10px 15px 0;
+    background-image:url(img/bg.jpg);
+    background-repeat:no-repeat;
+    color:#A2A3A8;
+    font-size:14px;
+    line-height:27px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.options .select{
+   background-position:0 -27px;
+   color:#F9b550;
+}
+
+.button-info{
+  clear:both;
+  width:550px;
+  height:31px;
+  margin-bottom:15px;
+}
+
+.button{
+	clear:both;
+	width:234px;
+	height:31px;
+	background:url(img/add.jpg) no-repeat;
+	float:left;
+}
+
+.button p{
+	width:154px;
+	margin:6px 0 0 12px;
+	float:left;
+}
+
+.button p input{
+	width:145px;
+	border:none;
+	outline:none;
+}
+
+.button span{
+	display:block;
+	float:left;
+	width:65px;
+	height:25px;
+	cursor:pointer;
+	margin-top:4px;
+	text-align:center;
+	color:#fff;
+	font-size:13px;
+	line-height:25px;
+}
+
+.tip{
+	width:265px;
+	height:21px;
+	float:left;
+	margin-left:15px;
+	background:url(img/tip.jpg) no-repeat left bottom;
+	padding:10px 0 0 16px;
+	font-size:12px;
+	display:none;
+}
+
+.result li{
+    background-position:left bottom;
+    cursor:default;
+    position:relative;
+}
+
+.result li span{
+	position:absolute;
+	width:15px;
+	height:15px;
+	top:0;
+	right:0;
+	cursor:pointer;
+	background:transparent;
+}
+
