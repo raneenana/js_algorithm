@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#ipt{
+			margin: 0px;
+			padding: 0px;
+			width: 180px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			border-radius: 6px;
+			background: #FF9A00;
+			font-size: 20px;
+		}
+		#btn{
+			width: 180px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			border-radius: 6px;
+			background: #FF9A00;
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<p id="ipt"></p><br>
+	<p id="btn">点击获取</p>
+
+	<script>
+
+	// 1)获取6位随机验证码  
+	// 2)禁用。倒计时
+	// 3）归位
+
+		var btn = document.getElementById("btn"),
+		    ipt = document.getElementById("ipt");
+		var time = 5,   //5s后重试
+			timer = null; //保存定时器的ID
+
+		//1)获取6位随机验证码
+		function yzNum(){
+			var arr = ["1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","G","H"];
+
+			var newArr = [];
+
+			for(var i=0;i<6;i++){
+				var num = randomNum(0,arr.length-1);
+				newArr.push(arr[num]);
+			}
+			return newArr.join("");
+		}
+		function randomNum(min,max){
+			var num = Math.floor(Math.random()*(max-min+1)+min);
+			return num;
+		}
+	
+			
+		btn.onclick = function(){
+			//解决多次点击的BUG
+			if(!timer){
+				//点击获取2秒后将6位验证码写入p
+				setTimeout(function(){
+					ipt.innerHTML =  yzNum();
+				},2000);
+
+				//定时器
+				timer = setInterval(function(){
+
+					//改变字体颜色
+					btn.style.color = "#ccc";
+
+					//几秒后重试
+					btn.innerHTML = time-- + "S后重试";
+
+					//5秒后重置
+					if(time < 0){
+						clearInterval(timer);
+						ipt.innerHTML = "";
+						timer = null;
+						time = 5;
+						btn.innerHTML = "重新获取";
+						btn.style.color = "#000";
+					}
+					
+				},1000);
+			}
+		}
+	</script>
+</body>
+</html>

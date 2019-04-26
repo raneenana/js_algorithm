@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin: 0;padding: 0}
+	#box{width: 200px;height: 200px;background: red;position: absolute;}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+
+		var pageWidth = window.innerWidth;
+		var pageHeight = window.innerHeight;
+
+		// //浏览器兼容   几乎所有的浏览器已经都兼容
+		// if(typeof pageWidth != "number"){
+		// 	if(document.compatMode == "CSS1Compat"){
+		// 		pageWidth = document.documentElement.clientWidth;
+		// 		pageHeight = document.documentElement.clientHeight;
+		// 	}else{
+		// 		pageWidth = document.body.clientWidth;
+		// 		pageHeight = document.body.clientHeight;
+		// 	}
+		// }
+
+		var box = document.getElementById("box");
+
+		box.onmousedown = function(e){
+
+			//浏览器兼容
+			var evt = e||window.event;
+
+			var _x = evt.clientX - box.offsetLeft
+			,	_y = evt.clientY - box.offsetTop;
+
+			box.onmousemove = function(e){
+				
+				var evt = e||window.event;
+
+				box.style.left = evt.clientX - _x < 0 ? 0 +"px" : Math.min(pageWidth-200,evt.clientX - _x)+"px";
+
+				box.style.top = evt.clientY - _y < 0 ? 0 +"px" : Math.min(pageHeight-200,evt.clientY - _y)+"px";
+
+			}
+		}
+
+		box.onmouseup = function(){
+			box.onmousemove = null;
+		}
+		
+	</script>
+</body>
+</html>

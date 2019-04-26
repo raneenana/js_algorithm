@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>十六进制颜色值随机生成</title>
+</head>
+<body>
+	<div id="box">
+		<button id = "btn1">开始</button>
+		<button id = "btn2">结束</button>
+	</div>
+	
+<script>
+	
+		var data = ["1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"];
+		var box = document.getElementById("box");
+		var btn1 = document.getElementById("btn1");
+		var btn2 = document.getElementById("btn2");
+		box.setAttribute("style","width:200px;height:200px;border:2px solid #ccc;");
+		function onClick(){
+			var str = "";
+			for(var i = 0;i<6;i++){
+				var rand = Math.floor(Math.random()*16);
+				str += data[rand];
+			}
+			box.style.background = "#"+str;
+		}
+		var sid = null;
+		btn1.onclick =function(){
+			if(sid){
+				clearInterval(sid);
+			}
+			sid = setInterval(onClick,100);
+		}
+		btn2.onclick = function(){
+			clearInterval(sid);
+		}
+	
+
+</script>
+</body>
+</html>
