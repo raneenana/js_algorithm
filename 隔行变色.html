@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>隔行变色</title>
+	<style>
+	/*#ul{background-color: ;font-size: ;}  //backgroundColor fontSize*/
+	</style>
+</head>
+<body>
+	
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	
+
+	<script>
+		
+		var lis = document.getElementsByTagName("li");//获取所有标签名为'li'的节点
+
+		
+		// for(var i=0;i<len;i++){
+		// 	if(i%2 == 0){
+		// 		lis[i].style.backgroundColor= "red";
+		// 	}
+		// }
+		for(var i=0;i<lis.length;i+=2){
+			lis[i].style.backgroundColor= "blue";
+			//节点.style.属性="属性值";  ==>属性写法:驼峰命名法 
+		}
+
+	</script>
+</body>
+</html>

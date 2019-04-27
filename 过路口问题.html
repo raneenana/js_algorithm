@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>算法1</title>
+</head>
+<body>
+	<script>
+		// 假设某人有100,000现金。每经过一次路口需要进行一次交费。交费规则为当他现金大于50,000时每次需要交5%如果现金小于等于50,000时每次交5,000。请写一程序计算此人可以经过多少次这个路口。
+		function fn(money){
+			var num = 0;
+			while(money >= 5000){    //当money少于5000时，结束循环。
+				if(money > 50000){
+					money = money - money*0.05;
+					// console.log(money);
+					num++;
+				}else{               
+					money = money -5000;
+					// console.log(money);
+					num++;
+				}
+			}
+			document.write("此人可以经过 " + num + "次这个路口。");
+			
+		}
+		fn(100000);
+	</script>
+</body>
+</html>
