@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>递归</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      line-height: 30px;
+      padding-left: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap"></div>
+  <div class="wrap2"></div>
+<script>
+const options = [
+  {
+    value: 'zhejiang',
+    label: 'Zhejiang',
+    children: [
+      {
+        value: 'hangzhou',
+        label: 'Hangzhou',
+        children: [
+          {
+            value: 'xihu',
+            label: 'West Lake'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    value: 'jiangsu',
+    label: 'Jiangsu',
+    children: [
+      {
+        value: 'nanjing',
+        label: 'Nanjing',
+        children: [
+          {
+            value: 'zhonghuamen',
+            label: 'Zhong Hua Men'
+          }
+        ]
+      }
+    ]
+  }
+]
+const JsonTree=[{
+  "tagName":"ul",
+  "props":{
+      "className":"list",
+      "data-name":"jsontree"
+  }
+},
+{
+  "tagName":"a",
+  "props":{
+      "href":"https://www.aliyun.com",
+      "target":"_blank"
+  },
+  "children":"阿里云"
+}]
+
+
+var parent = document.querySelector(".wrap")
+createView(options,parent)
+function createView(opt,parent) {
+  opt.forEach(item => {
+    var odiv = document.createElement('div')
+    odiv.append(`${item.label}`)
+    if(item.children){
+      createView(item.children,odiv)
+    }
+    parent.append(odiv)
+  })
+}
+var par = document.querySelector(".wrap2")
+function viewport(JsonTree,par){
+  JsonTree.map(item => {
+    var el = document.createElement(item.tagName)
+    for(key in item.props){
+      el.setAttribute(key,item.props[key])
+    }
+    if(item.children){
+      el.append(item.children)
+    }
+    console.log(el)
+    par.append(el)
+  })
+}
+viewport(JsonTree,par)
+</script>
+</body>
+
+</html>
