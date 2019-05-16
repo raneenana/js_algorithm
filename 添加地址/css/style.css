@@ -1,0 +1,28 @@
+
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	width: 100%;
+	height: 100%;
+}
+.mark{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+.hide{
+	display: none;
+}
+.content{
+	position: relative;
+	left: 35%;
+	top: 30%;
+	width: 400px;
+	height: 300px;
+	background: skyblue;
+}

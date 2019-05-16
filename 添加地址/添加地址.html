@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style>
+        .mark{
+            width:100%;
+            height:100%;
+            background:rgba(0, 0, 0, 0.5);
+            position: absolute;
+            left:0;
+            top:0;
+        }
+        .hide{
+            display:none;
+        }
+        .content{
+            width:400px;
+            height:300px;
+            position: relative;
+            left:40%;
+            top:40%;
+            background:pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <button id="btn">添加地址</button>
+        <ul id="ulId">
+            <li>北京市大兴区榆垡八维<span>默认地址</span></li>
+            <li>北京市中关村科技园<span>默认地址</span></li>
+            <li>北京市朝阳区朝阳人民群众委员会<span>默认地址</span></li>
+        </ul>
+    </div>
+    <div class="mark hide" id="mark">
+        <div class="content">
+            地址: <input type="text" id="address"><br>
+            门牌号: <input type="text" id="number"><br>
+            <button id="add">添加</button>
+            <button id="res">取消</button>
+        </div>
+    </div>
+    <script>
+        var btn=document.getElementById("btn");
+        var ulId=document.getElementById("ulId");
+        var mark=document.getElementById("mark");
+        var address=document.getElementById("address");
+        var number=document.getElementById("number");
+        var add=document.getElementById("add");
+        var res=document.getElementById("res");
+        btn.onclick=function(){
+            mark.classList.remove("hide");
+            add.onclick=function(){
+                var lli=document.createElement("li");
+                lli.innerHTML=`地址：${address.value}门牌号：${number.value}`;
+                ulId.appendChild(lli);
+                mark.classList.add("hide");
+                address.value="";
+                number.value="";
+                fn();
+            }
+            res.onclick=function(){
+                mark.classList.add("hide");
+                address.value="";
+                number.value="";
+            }
+        }
+            function fn(){
+            for(var i=0;i<ulId.children.length;i++){
+                ulId.children[i].onclick=function(){
+                    ulId.removeChild(this);
+                }
+            }
+        }
+
+            //fn();
+
+
+    </script>
+</body>
+</html>
