@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr=[15,25,2,1,84,65];
+        function fn(s){
+            for(var i=1;i<s.length;i++){
+                for(var j=0;j<s.length-i;j++){
+                    var tem;
+                    if(s[j]>s[j+1]){
+                        tem=s[j];
+                        s[j]=s[j+1];
+                        s[j+1]=tem;
+                    }
+                }
+            }
+            return s;
+        }
+        console.log(fn(arr));
+    </script>
+</body>
+</html>

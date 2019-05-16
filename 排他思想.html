@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ulId">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        var ulId=document.getElementById("ulId");
+        var lis=ulId.getElementsByTagName("li");
+        for(var i=0;i<lis.length;i++){
+            lis[i].onmouseover=function(){
+                for(var j=0;j<lis.length;j++){
+                     lis[j].style.border="none";
+                }
+                 this.style.border="1px solid red"
+            }
+        }
+    </script>
+</body>
+</html>

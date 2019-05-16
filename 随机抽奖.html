@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div>您抽中的奖品是：<span id="spn"></span></div>
+	<input type="button" value="抽 奖" id="btn" />
+    你还有<span id="count">3</span>次机会
+    <div id="box"></div>
+
+	<script>
+        var prices = ["Iphone7","Ipad","Ipad mini","小米Note4","谢谢参与","50员充值卡","300元京东购物卡","新马泰7日游"];
+        //分别获取节点
+        var spn=document.getElementById("spn");
+        var btn=document.getElementById("btn");
+        var count=document.getElementById("count");
+        var box=document.getElementById("box");
+        box.style.cssText="width:400px; height:20px; background:#ccc";
+        var time=null;//用来保存定时器返回值的变量
+        //给抽奖按钮绑定单击事件
+        btn.onclick=function(){
+            if(count.innerHTML>0){//判断是否还有抽奖机会
+                count.innerHTML--;//抽奖次数减一
+            btn.disabled=true;//禁用按钮
+            time=setInterval(randomPrice,20);//间歇调用
+            setTimeout(removePrice,3000);
+                                  }
+            else{
+                alert("次数用完了 回家吧");
+                btn.disabled=true;
+                }
+                              }
+        //封装随机获取奖品的函数
+        function randomPrice(){
+            var index=Math.floor(Math.random()*prices.length);//获取到奖品的下标
+            spn.innerHTML=prices[index];//将随机获取的奖品内容写入到第一个span中
+        }
+
+        function removePrice(){
+            clearInterval(time);//清除间歇调用
+        btn.disabled=false;//解除禁用
+            var index=prices.indexOf(spn.innerHTML);//判断奖品在数组中的位置
+            box.innerHTML=prices[index];
+            prices.splice(index,1);//删除奖品
+
+                                          }
+        // 补全代码，实现点击“抽奖”按钮进行抽奖，具体要求如下:
+        // 点击“抽奖”按钮后，在数组中随机生成一个奖品，生成时间为3秒，必须有随机生成的
+        // 过程，即需要使用定时器，<span id="result"></span>中要显示抽中的奖品，3秒后定时器停止，此时抽中哪个奖品，显示
+        // 哪个奖品名称，同时抽中的奖品从数组中删除。
+        // 抽奖过程中“抽奖”按钮不可再次点击，抽奖结束后，可以继续点击抽
+        // 每一个用户只有3次抽奖机会，如果是第四次抽，点击按钮时，提示用户“您的抽奖次数已用完~，明天再来抽吧！”
+	</script>
+</body>
+</html>
