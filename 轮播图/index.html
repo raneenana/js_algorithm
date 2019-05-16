@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        *{list-style:none;margin:0;padding:0;}
+        #box{height:409px;width:1000px;margin: 20px auto;overflow:hidden;position:relative;}
+        ol{position:absolute;bottom:50px;right:50px;}
+        ol li{width:40px;height:40px;background:blue;border-radius:50%;float: left;margin-left:10px;color:#FFF;text-align:center;line-height:40px;}
+        ol .bg{background:pink;}
+        span{position:absolute;top:47%;}
+        #left{position:absolute;left:50px;}
+        #right{position:absolute;right:50px;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="x">
+            <li><img src="img/1.jpg" alt=""></li>
+            <li><img src="img/2.jpg" alt=""></li>
+            <li><img src="img/3.jpg" alt=""></li>
+            <li><img src="img/4.jpg" alt=""></li>
+            <li><img src="img/5.jpg" alt=""></li>
+            <li><img src="img/6.jpg" alt=""></li>
+        </ul>
+        <ol>
+            <li class="bg">一</li>
+            <li>二</li>
+            <li>三</li>
+            <li>四</li>
+            <li>五</li>
+            <li>六</li>
+        </ol>
+        <span id="left" ><img src="img/l.png" alt="" /></span>
+        <span id="right"><img src="img/r.png" alt="" /></span>
+     </div>
+        <script>
+        var box=document.getElementById("box");
+        //获取图片集合
+        var pic=document.getElementsByTagName("ul")[0].getElementsByTagName("li");
+
+        //获取按钮的集合
+        var lis=document.getElementsByTagName("ol")[0].getElementsByTagName("li");
+        //获取左右箭头
+        var left=document.getElementById("left");
+        var right=document.getElementById("right");
+        var count=0;
+        var time=null;
+        //定义计时器
+        function lol(){
+        time=setInterval(function(){
+            count++;
+            if(count>lis.length-1){count=0;}
+            lunbo(count);
+
+        },1000);}
+
+        function lunbo(count){
+            for(var i=0;i<lis.length;i++){
+                //排他思想 清除所有
+                pic[i].style.display="none";
+                lis[i].className="";
+                                         }
+                //显示我自己
+                pic[count].style.display="block";
+                lis[count].className="bg";
+                        }
+        //鼠标移入后 清除定时器(轮播暂停)
+        box.onmouseover=function(){
+            clearInterval(time);
+                                    }
+        //鼠标移出后 调用定时器(轮播开始)
+        box.onmouseout=function(){
+            lol();
+                                 }
+        //给左边箭头绑定事件
+        left.onclick=function(){
+            count--;
+            if(count<0){count=lis.length-1;}
+            lunbo(count);
+                               }
+        //给右边箭头绑定事件
+        right.onclick=function(){
+            count++;
+            if(count>lis.length-1){count=0;}
+            lunbo(count);
+                                }
+
+        for(var i=0;i<lis.length;i++){
+            lis[i].index=i;
+            lis[i].onclick=function(){
+            lunbo(this.index);
+            //更新count值
+            count=this.index;
+                                      }
+                                     }
+
+
+
+
+
+
+
+
+
+
+    //         var pics = document.getElementById("x").getElementsByTagName( 'li' );
+    //         console.log(pics);
+    //         var nums=document.getElementsByTagName("ol")[0].getElementsByTagName("li");
+    //         var box=document.getElementById("box");
+    //         var left=document.getElementById("left");
+    //         var right=document.getElementById("right");
+    //         var id=0;
+    //         var timer=null;
+
+
+
+
+
+    //         function lbt(){
+    //             timer = setInterval( function(){
+    //             id++;
+    //             if(id>pics.length-1){id=0;}
+    //             changejs( id );
+    //             },1000 )
+    //         }
+    //         lbt();
+
+
+    //         box.onmouseover = function(){
+    //             clearInterval( timer );
+    //         }
+    //         box.onmouseout = function(){
+    //             lbt();
+    //         }
+
+    //         left.onclick = function(){
+    //             id--;
+    //             if(id<0)id = pics.length - 1;
+    //             changejs( id );
+    //         }
+    //         right.onclick = function(){
+    //             id++;
+    //             if(id>pics.length - 1)id=0;
+    //             changejs( id );
+
+    //         }
+
+
+
+    // //DOM 0级事件 setInterval
+    //         for(var j=0;j<nums.length;j++){
+    //             nums[j].index = j;
+    //             nums[j].onclick = function(){
+    //                 changejs( this.index );
+    //                 id=this.index;
+    //             }
+
+    //         }
+
+
+
+
+
+    //         function changejs( n ){
+    //             for(var i=0;i<pics.length;i++){
+    //                 pics[i].style.display = 'none';
+    //                 nums[i].className = '';
+    //             }
+    //             pics[n].style.display = 'block';
+    //             nums[n].className = 'bg';
+    //         }
+        </script>
+
+</body>
+</html>
