@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="box">
+        <ul id="fill_in">
+            <form action="javascript:void(0);">
+                <li>用户名: <input type="text" id="text" class="text" placeholder="用户名"></li>
+                <li>评论内容: <textarea placeholder="评论内容 10-100字" id="content"></textarea></li>
+                <li><input type="submit" id="btn" value="提交" class="btn"></li>
+            </form>
+        </ul>
+        <div id="message_text">
+            <div>
+                <h2><button id="btn1">隐藏留言</button><p id="pid">已有 <a id="aid">0</a>人评论</p></h2>
+            </div>
+
+            <ul id="ulId">
+                <!-- <li>
+                    <img src="img/userBj.png" alt="">
+                    <h3>站名</h3>
+                    <h5>2018/3/3</h5>
+                    <p>asdfsadfasff</p>
+                </li> -->
+
+            </ul>
+        </div>
+    </div>
+    <script>
+        var box=document.getElementById("box"),
+            fill=document.getElementById("fill_in"),
+            text=document.getElementById("text"),
+            content=document.getElementById("content"),
+            btn=document.getElementById("btn"),
+            mtext=document.getElementById("message_text"),
+            btn1=document.getElementById("btn1"),
+            pid=document.getElementById("pid"),
+            aid=document.getElementById("aid"),
+            ulId=document.getElementById("ulId");
+        btn.onclick=function(){
+            if(text.value==""||content.value==""){
+                alert("没有输入")
+            }
+            else{
+                var oli=document.createElement("li");
+                oli.innerHTML=`<img src="img/userBj.png"><h3>${text.value}</h3><h5>${new Date().toLocaleString()}</h5><p>${content.value}<p>`
+                ulId.insertBefore(oli,ulId.firstChild);
+                mtext.style.display="block";aid.innerHTML++;
+                text.value="";
+                content.value="";
+            }
+        }
+        btn1.onclick=function(){
+            if(this.innerHTML=="隐藏留言"){
+                ulId.style.display="none";
+                this.innerHTML="显示留言"
+            }
+            else{
+                ulId.style.display="block";
+                this.innerHTML="隐藏留言"
+            }
+        }
+        </script>
+</body>
+</html>
