@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,ol{
+            list-style: none;
+            float: left;
+            margin:0;
+            padding:0
+        }
+        ul li{
+            width:50px;
+            height:50px;
+            float: left;
+            border-radius: 50%;
+            margin-left: 20px;
+            text-align: center;
+            color:#fff;
+            font-size:24px;
+            line-height: 50px;
+        }
+        ol li{
+            width:50px;
+            height:50px;
+            float: left;
+            border-radius: 50%;
+            margin-left: 20px;
+            text-align: center;
+            color:#fff;
+            font-size:24px;
+            line-height: 50px;
+        }
+        ul li{
+            background: red;
+        }
+        ol li{
+            background: blue;
+        }
+        button{
+            height:30px;
+            width:80px;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <ol>
+        <li></li>
+        <li></li>
+    </ol>
+    <button>开始</button>
+    <button>清空</button>
+    <script>
+        var lis=document.querySelectorAll("li"),
+            btns=document.querySelectorAll("button");
+        var time=null,count=3;
+        btns[0].onclick=function(){
+            time=setInterval(dlt,200);
+            var time2=setInterval(function() {
+                btns[0].innerHTML=count-- +"s后重试";
+                if(count<0){
+                    clearInterval(time);
+                    clearInterval(time2)
+                    btns[0].innerHTML="开始";
+                    btns[0].disabled=false;
+                    count=3;
+                }
+                else{
+                    btns[0].disabled=true;
+                }
+            }, 1000);
+        }
+        btns[1].onclick=function(){
+            for(var i=0;i<lis.length;i++){
+                lis[i].innerHTML=""
+            }
+        }
+        function Random(min,max){
+            return Math.floor(Math.random()*(max-min+1)+min);
+        }
+        //封装函数，获取大乐透中各个小球中的值
+        function dlt(){
+            var redarr=[];
+            while(redarr.length<5){
+                var num=Random(1,33);
+                if(redarr.indexOf(num)==-1){
+                    redarr.push(num);
+                }
+            }
+            redarr.sort((a,b)=>a-b)
+            var bluearr=[];
+            while(bluearr.length<5){
+                var num=Random(1,33);
+                if(bluearr.indexOf(num)==-1){
+                    bluearr.push(num);
+                }
+            }
+            bluearr.sort((a,b)=>a-b);
+            var nums=redarr.concat(bluearr)
+            for(var i=0;i<lis.length;i++){
+                lis[i].innerHTML=nums[i];
+            }
+        }
+        
+        
+    </script>
+</body>
+</html>

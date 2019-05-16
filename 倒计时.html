@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <h1>国庆回家倒计时：<span id="id"></span>天<span id="id1"></span>小时<span id="id2"></span>分<span id="id3"></span>秒</h1>
+    <script>
+    function fn(){
+        var time=new Date();
+        var time1=new Date("2018-10-1");
+        var ntime=time1-time;
+        var Seconds=Math.floor(ntime/1000%60),
+            Minutes=Math.floor(ntime/1000/60%60),
+            hours=Math.floor(ntime/1000/60/60%24),
+            day=Math.floor(ntime/1000/60/60/24);
+        var id=document.getElementById("id");
+        var id1=document.getElementById("id1");
+        var id2=document.getElementById("id2");
+        var id3=document.getElementById("id3");
+        id.innerHTML=day;
+        id1.innerHTML=hours;
+        id2.innerHTML=Minutes;
+        id3.innerHTML=Seconds;
+    }
+    setInterval(fn,1000);
+    </script>
+</body>
+</html>
