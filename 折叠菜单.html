@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+        
+        ul ul {
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="meau">
+        <h5>权限管理</h5>
+        <!-- <ol>
+            <li class="meau_name">日常工作
+                <ol>
+                    <li class="meau_name">新建工作
+                        <ol>
+                            <li class="meau_name">人事
+                                <ol>
+                                    <li><input type="checkbox">请假申请</li>
+                                    <li><input type="checkbox">出差申请</li>
+                                    <li><input type="checkbox">招聘申请</li>
+                                </ol>
+                            </li>
+                            <li><input type="checkbox">财务</li>
+                            <li><input type="checkbox">客服</li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+            <li class="meau_name">一级菜单2
+                <ol>
+                    <li class="meau_name">二级菜单2
+                        <ol>
+                            <li><input type="checkbox">用户管理</li>
+                            <li><input type="checkbox">用户组管理</li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+            <li class="meau_name">一级菜单3
+                <ol>
+                    <li class="meau_name">二级菜单2
+                        <ol>
+                            <li><input type="checkbox">用户管理1</li>
+                            <li><input type="checkbox">用户组管理2</li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+        </ol> -->
+        <p>已选中：
+            <selection></selection>
+        </p>
+    </div>
+    <script>
+        var data = [{
+            "name": "11111111111111111111", //一级
+            "menu": [{
+                    "name": "1-2222222222222222222222", //二级
+                    "menu": [{
+                        "name": "1-3333333333333333333333333", //三级
+                    }, {
+                        "name": "1-3333333333333333333333333",
+                    }, {
+                        "name": "1-3333333333333333333333333",
+                        "menu": [{
+                            "name": "1-4444444444444",
+                        }],
+                    }, ],
+                },
+
+            ]
+        }, {
+            "name": "222222222222222", //一级
+            "menu": [{
+                    "name": "2-2222222222222222222222", //二级
+                    "menu": [{
+                        "name": "2-3333333333333333333333333", //三级
+                    }, {
+                        "name": "2-3333333333333333333333333",
+                    }, {
+                        "name": "2-3333333333333333333333333",
+                        "menu": [{
+                            "name": "2-4444444444444",
+                        }],
+                    }, ],
+                },
+
+            ]
+        }, {
+            "name": "3333333333333333333333", //一级
+            "menu": [{
+                    "name": "3-2222222222222222222222", //二级
+                    "menu": [{
+                        "name": "3-3333333333333333333333333", //三级
+                    }, {
+                        "name": "3-3333333333333333333333333",
+                    }, {
+                        "name": "3-3333333333333333333333333",
+                        "menu": [{
+                            "name": "3-4444444444444",
+                        }],
+                    }, ],
+                },
+
+            ]
+        }, {
+            "name": "4444444444444444444444"
+        }]
+
+        function create(data) {
+            var meau = document.getElementById("meau");
+            var ul = document.createElement("ul");
+            meau.insertBefore(ul, meau.children[1]);
+            data.forEach(function(item) {
+                var li = document.createElement("li")
+                li.innerHTML = item.name;
+                if (item.menu) {
+                    li.className = "meau_name";
+                    li.appendChild(create(item.menu))
+                } else {
+                    var ck = document.createElement("input")
+                    ck.type = "checkbox";
+                    li.insertBefore(ck, li.firstChild)
+                }
+                ul.appendChild(li);
+            });
+            return ul;
+        }
+        var ul = create(data)
+        console.log(ul);
+
+
+
+
+
+
+        var lis = [].slice.call(document.querySelectorAll("#meau li"));
+        var ipts = [].slice.call(document.querySelectorAll("#meau input"));
+        var selection = document.querySelector("selection")
+        lis.forEach(function(item) { // function(item)事件回调函数
+            item.addEventListener('click', function(e) { //事件处理函数，每一个事件处理函数都有一个事件对象，此处用e接收
+                //用一个变量接收ie6以上或者ie6以下的浏览器执行
+                var eve = e || window.event;
+                //阻止事件冒泡
+                eve.stopPropagation(item);
+                //判断有没有类名，如果没有meau_name类名 用return结束函数
+                if (!this.className) {
+                    return;
+                } else {
+                    //判断类名是否是meau_name
+                    if (this.className === "meau_name") {
+                        //如果条件成立则给这个元素添加active类名
+                        this.classList.add("active");
+                        //第一个ol显示
+                        this.children[0].style.display = "block"
+                    } else {
+                        this.classList.remove("active");
+                        this.children[0].style.display = "none"
+                    }
+                }
+
+            })
+        });
+        ipts.forEach(function(em) { //事件回调函数
+            em.addEventListener("click", function(e) {
+                var eve = e || window.event;
+                //阻止事件冒泡
+                eve.stopPropagation(em);
+                //判断有没有类名，如果没有meau_name类名 用return结束函数
+                var nn = this.nextSibling.nodeValue; //获取input的兄弟节点的内容
+                if (this.checked) {
+                    //创建一个span节点
+                    var ospan = document.createElement("span");
+                    //span节点的内容为点击的input兄弟节点的内容
+                    ospan.innerHTML = this.nextSibling.nodeValue;
+                    //将span节点追加到selection中
+                    selection.appendChild(ospan);
+                } else {
+                    //获取selection下的所有的子节点并转为数组
+                    var dex = [].slice.call(selection.children);
+                    //forEach循环遍历dex数组的每一项
+                    dex.forEach(function(item) { //事件回调函数
+                        //判断dex数组每一项的内容是否与点击的input节点的兄弟节点的内容是否相等
+                        if (item.innerHTML === nn) {
+                            //如果想等的话删除这一项
+                            selection.removeChild(item)
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

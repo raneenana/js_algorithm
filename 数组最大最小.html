@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 95, 23, 64, 45];
+        var max = Math.max.apply(Math, arr),
+            max1 = Math.max.apply(null, arr),
+            min = Math.min.apply(Math, arr),
+            min1 = Math.min.apply(null, arr);
+        console.log(max);
+        console.log(max);
+        console.log(min);
+        console.log(min1)
+    </script>
+</body>
+
+</html>

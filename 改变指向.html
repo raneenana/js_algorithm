@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var x = {
+            q: 20,
+            w: function() {
+                console.log(this.q + "岁了，您已经是阿姨了")
+            }
+        }
+        var y = {
+            q: "45",
+            f: "你好"
+        }
+        x.w();
+        x.w.call(y)
+    </script>
+</body>
+
+</html>
