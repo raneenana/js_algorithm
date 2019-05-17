@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: #98d;
+            cursor: move;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+
+    </div>
+    <script>
+        var box = document.getElementById("box");
+        var flag = false;
+        //var Qpos = null;
+        //鼠标按下事件
+        box.onmousedown = function(e) {
+            var eve = e || event;
+            Qpos = {
+                x: eve.offsetX,
+                y: eve.offsetY
+            }
+            flag = true;
+        }
+        document.onmousemove = function(e) {
+            if (flag) {
+                var eve = e || event;
+                var pos = {
+                    x: eve.pageX - Qpos.x,
+                    y: eve.pageY - Qpos.y
+                }
+                box.style.cssText = "left:" + pos.x + "px;top:" + pos.y + "px";
+            }
+        }
+        document.onmouseup = function() {
+            flag = false;
+        }
+    </script>
+</body>
+
+</html>
